@@ -12,13 +12,15 @@ class MoviesListViewController: UIViewController {
     
     @IBOutlet private weak var moviesTableView: UITableView?
     
+    var genres: [Genre]
     var movies: [Movie]
     private let presenter: MoviesListPresenter
     
     //    MARK: - Obj Lifecycle
     required init?(coder aDecoder: NSCoder) {
         movies = []
-        presenter = MoviesListPresenter(movieService: MovieNetwork())
+        genres = []
+        presenter = MoviesListPresenter(movieService: MovieNetwork(), genreService: GenreNetwork())
         super.init(coder: aDecoder)
     }
     
@@ -33,7 +35,7 @@ class MoviesListViewController: UIViewController {
     //    MARK: - Setup
     func setupPresenter() {
         presenter.attachView(view: self)
-        presenter.loadMovies(for: Genre())
+        presenter.loadGenres()
     }
     
     func setupTableView() {
@@ -44,6 +46,11 @@ class MoviesListViewController: UIViewController {
             tbv.tableFooterView = UIView()
         }
     }
+    
+    //    MARK: - Action
+    @IBAction func genresButtonTouched(_ sender: Any) {
+        
+    }
 }
 
 extension MoviesListViewController: MoviesListView {
@@ -51,6 +58,14 @@ extension MoviesListViewController: MoviesListView {
         self.movies = movies
         
         moviesTableView?.reloadData()
+    }
+    
+    func setupGenres(genres: [Genre]) {
+        self.genres = genres
+        
+        if let firstGenre = genres.first {
+            presenter.loadMovies(for: firstGenre)
+        }
     }
 }
 

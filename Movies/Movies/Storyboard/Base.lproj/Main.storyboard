@@ -51,7 +51,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="R2x-Es-XqG">
                         <barButtonItem key="backBarButtonItem" title="Back" id="3wG-jI-fbA"/>
-                        <barButtonItem key="leftBarButtonItem" title="Genres" id="rEl-Kn-cce"/>
+                        <barButtonItem key="leftBarButtonItem" title="Genres" id="rEl-Kn-cce">
+                            <connections>
+                                <action selector="genresButtonTouched:" destination="HxQ-mU-zQr" id="CYa-ql-TAt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="moviesTableView" destination="dIE-gs-sZb" id="tfg-jl-9sD"/>

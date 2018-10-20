@@ -10,4 +10,5 @@ import UIKit
 
 protocol MoviesListView: NSObjectProtocol {
     func setupMovies(movies: [Movie])
+    func setupGenres(genres: [Genre])
 }

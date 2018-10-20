@@ -9,8 +9,6 @@
 import UIKit
 import Alamofire
 
-typealias JSONDict = [String: Any]
-
 struct NetworkManager {
     typealias Parameters = [String: Any]
     typealias Headers = [String: String]

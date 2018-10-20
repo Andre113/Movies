@@ -10,11 +10,25 @@ import Foundation
 
 class MoviesListPresenter: Presenter {
     private let movieService: MovieService
+    private let genreService: GenreService
     weak var view: MoviesListView?
     
     //    MARK: - Obj Lifecycle
-    init(movieService: MovieService) {
+    init(movieService: MovieService,
+         genreService: GenreService) {
         self.movieService = movieService
+        self.genreService = genreService
+    }
+    
+    //    MARK: - Load Genres
+    func loadGenres() {
+        genreService.fetchGenres { (genres, error) in
+            if let error = error {
+                return
+            }
+            
+            self.view?.setupGenres(genres: genres)
+        }
     }
     
     //    MARK: - Load Movies
