@@ -32,13 +32,23 @@ class MoviesListPresenter: Presenter {
     }
     
     //    MARK: - Load Movies
-    func loadMovies(for genre: Genre) {
-        movieService.fetchMovies(genre: genre, page: 1) { (movies, error) in
+    func loadMovies(for genre: Genre, at page: Int) {
+        movieService.fetchMovies(genre: genre, page: page) { (movies, error) in
             if let error = error {
                 return
             }
             
             self.view?.setupMovies(movies: movies)
+        }
+    }
+    
+    func loadMoreMovies(for genre: Genre, at page: Int) {
+        movieService.fetchMovies(genre: genre, page: page) { (movies, error) in
+            if let error = error {
+                return
+            }
+            
+            self.view?.setupMoreMovies(movies: movies)
         }
     }
 }

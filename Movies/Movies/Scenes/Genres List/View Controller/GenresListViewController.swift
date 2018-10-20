@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GenresListDelegate: class {
-    func didSelectGenre(genre: Genre)
+    func setupGenre(genre: Genre)
 }
 
 class GenresListViewController: UIViewController {
@@ -17,6 +17,7 @@ class GenresListViewController: UIViewController {
     @IBOutlet private weak var genresTableView: UITableView?
     
     private var genres: [Genre]
+    private var selectedGenre: Genre?
     private let presenter: GenresListPresenter
     weak var delegate: GenresListDelegate?
     
@@ -35,9 +36,21 @@ class GenresListViewController: UIViewController {
         setupPresenter()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let index = genres.firstIndex(where: { (genre) -> Bool in
+            genre.id == selectedGenre?.id
+        }) {
+            let indexPath = IndexPath(row: index, section: 0)
+            genresTableView?.scrollToRow(at: indexPath, at: .middle, animated: false)
+        }
+    }
+    
     //    MARK: - Setup
-    func setupGenres(genres: [Genre]) {
+    func setupGenres(genres: [Genre], selectedGenre: Genre?) {
         self.genres = genres
+        self.selectedGenre = selectedGenre
     }
     
     private func setupPresenter() {
@@ -73,7 +86,15 @@ extension GenresListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.setupGenre(genre: genres[indexPath.row])
+        let genre = genres[indexPath.row]
+        var selected = false
+        
+        if selectedGenre?.id == genre.id {
+            selected = true
+        }
+        
+        cell.setupGenre(genre: genre, selected: selected)
+        
         return cell
     }
     
@@ -82,11 +103,9 @@ extension GenresListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         if let delegate = delegate {
             let genre = genres[indexPath.row]
-            delegate.didSelectGenre(genre: genre)
+            delegate.setupGenre(genre: genre)
             dismiss(animated: true, completion: nil)
         }
     }

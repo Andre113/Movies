@@ -10,16 +10,24 @@ import UIKit
 
 class MoviesListViewController: UIViewController {
     
+    struct Constants {
+        static let initialPage = 1
+    }
+    
     @IBOutlet private weak var moviesTableView: UITableView?
     
-    var genres: [Genre]
-    var movies: [Movie]
+    private var genres: [Genre]
+    private var movies: [Movie]
+    private var actualPage: Int
+    private var actualGenre: Genre?
     private let presenter: MoviesListPresenter
     
     //    MARK: - Obj Lifecycle
     required init?(coder aDecoder: NSCoder) {
         movies = []
         genres = []
+        actualPage = Constants.initialPage
+        actualGenre = nil
         presenter = MoviesListPresenter(movieService: MovieNetwork(), genreService: GenreNetwork())
         super.init(coder: aDecoder)
     }
@@ -51,7 +59,7 @@ class MoviesListViewController: UIViewController {
     @IBAction func genresButtonTouched(_ sender: Any) {
         let st = UIStoryboard(name: "Main", bundle: nil)
         if let genresVC = st.instantiateViewController(withIdentifier: GenresListViewController.className) as? GenresListViewController {
-            genresVC.setupGenres(genres: genres)
+            genresVC.setupGenres(genres: genres, selectedGenre: actualGenre)
             genresVC.delegate = self
             navigationController?.presentInNavigation(vc: genresVC, completion: nil)
         }
@@ -66,18 +74,33 @@ extension MoviesListViewController: MoviesListView {
         moviesTableView?.layoutIfNeeded()
     }
     
+    func setupMoreMovies(movies: [Movie]) {
+        self.movies.append(contentsOf: movies)
+        
+        moviesTableView?.reloadData()
+    }
+    
     func setupGenres(genres: [Genre]) {
         self.genres = genres
         
         if let firstGenre = genres.first {
-            presenter.loadMovies(for: firstGenre)
+            self.actualGenre = firstGenre
+            presenter.loadMovies(for: firstGenre, at: actualPage)
         }
     }
 }
 
 extension MoviesListViewController: GenresListDelegate {
-    func didSelectGenre(genre: Genre) {
-        presenter.loadMovies(for: genre)
+    func setupGenre(genre: Genre) {
+        if let actualGenre = actualGenre {
+            if genre.id == actualGenre.id {
+                return
+            }
+        }
+        
+        actualGenre = genre
+        actualPage = Constants.initialPage
+        presenter.loadMovies(for: genre, at: actualPage)
     }
 }
 
@@ -99,6 +122,17 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setupMovie(movie: movie)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let limitRow = ((actualPage)*20)-6
+        
+        if indexPath.row == limitRow{
+            if let actualGenre = actualGenre {
+                actualPage += 1
+                presenter.loadMoreMovies(for: actualGenre, at: actualPage)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
