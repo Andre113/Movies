@@ -1,5 +1,5 @@
 //
-//  MoviesListView.swift
+//  Genre.swift
 //  Movies
 //
 //  Created by Andre Lucas Ota on 10/20/18.
@@ -8,6 +8,7 @@
 
 import UIKit
 
-protocol MoviesListView: NSObjectProtocol {
-    
+struct Genre: Codable {
+    let id: Int
+    let name: String
 }
