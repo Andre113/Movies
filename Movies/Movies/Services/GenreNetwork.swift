@@ -44,7 +44,7 @@ struct GenreNetwork: GenreService {
                 genres = try JSONDecoder().decode(GenreListDecodable.self, from: data).list
                 completionHandler(genres, error)
                 return
-            } catch let decodeError as NSError {
+            } catch let decodeError {
                 error = GenreServiceError.CannotFetch(decodeError.localizedDescription)
                 completionHandler(genres, error)
                 return

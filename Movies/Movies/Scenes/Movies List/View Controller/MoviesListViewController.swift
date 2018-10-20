@@ -33,12 +33,12 @@ class MoviesListViewController: UIViewController {
     }
     
     //    MARK: - Setup
-    func setupPresenter() {
+    private func setupPresenter() {
         presenter.attachView(view: self)
         presenter.loadGenres()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         if let tbv = moviesTableView {
             tbv.register(UINib(nibName: MovieListCell.className, bundle: nil), forCellReuseIdentifier: MovieListCell.className)
             tbv.delegate = self
@@ -63,6 +63,7 @@ extension MoviesListViewController: MoviesListView {
         self.movies = movies
         
         moviesTableView?.reloadData()
+        moviesTableView?.layoutIfNeeded()
     }
     
     func setupGenres(genres: [Genre]) {
@@ -76,7 +77,7 @@ extension MoviesListViewController: MoviesListView {
 
 extension MoviesListViewController: GenresListDelegate {
     func didSelectGenre(genre: Genre) {
-        
+        presenter.loadMovies(for: genre)
     }
 }
 
@@ -94,11 +95,14 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        let movie = movies[indexPath.row]
+        cell.setupMovie(movie: movie)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 230
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

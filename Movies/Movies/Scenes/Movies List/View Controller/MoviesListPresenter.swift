@@ -33,11 +33,12 @@ class MoviesListPresenter: Presenter {
     
     //    MARK: - Load Movies
     func loadMovies(for genre: Genre) {
-        var movies: [Movie] = []
-        for _ in 0...10 {
-            movies.append(Movie())
+        movieService.fetchMovies(genre: genre, page: 1) { (movies, error) in
+            if let error = error {
+                return
+            }
+            
+            self.view?.setupMovies(movies: movies)
         }
-        
-        view?.setupMovies(movies: movies)
     }
 }
