@@ -74,7 +74,12 @@ class MovieDetailsViewController: UIViewController {
         movieCrewBuilder.registerCellAtTableView()
         builders.append(movieCrewBuilder)
         
+        let movieCastBuilder = MovieCastCellBuilder(tableView: tableView, castMembers: credits.cast)
+        movieCastBuilder.registerCellAtTableView()
+        builders.append(movieCastBuilder)
+        
         tableView.reloadData()
+        tableView.layoutIfNeeded()
     }
     
     //    MARK: - Action

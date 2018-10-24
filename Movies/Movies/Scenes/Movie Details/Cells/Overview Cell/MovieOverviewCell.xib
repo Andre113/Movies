@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJj-dN-7QD">
-                        <rect key="frame" x="10" y="50" width="300" height="144.5"/>
+                        <rect key="frame" x="10" y="45" width="300" height="149.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -43,7 +43,7 @@
                     <constraint firstItem="uJj-dN-7QD" firstAttribute="leading" secondItem="VlR-y8-lRG" secondAttribute="leading" id="JdX-5b-tY8"/>
                     <constraint firstAttribute="bottom" secondItem="uJj-dN-7QD" secondAttribute="bottom" constant="10" id="LI4-bg-HUz"/>
                     <constraint firstItem="VlR-y8-lRG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="QTS-1k-2fv"/>
-                    <constraint firstItem="uJj-dN-7QD" firstAttribute="top" secondItem="VlR-y8-lRG" secondAttribute="bottom" constant="10" id="fzI-uW-9q5"/>
+                    <constraint firstItem="uJj-dN-7QD" firstAttribute="top" secondItem="VlR-y8-lRG" secondAttribute="bottom" constant="5" id="fzI-uW-9q5"/>
                     <constraint firstAttribute="trailing" secondItem="VlR-y8-lRG" secondAttribute="trailing" constant="10" id="hPL-Gz-gui"/>
                     <constraint firstItem="VlR-y8-lRG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="isa-2h-MWw"/>
                 </constraints>

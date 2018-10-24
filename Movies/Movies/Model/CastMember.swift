@@ -25,4 +25,17 @@ struct CastMember: Codable {
         case order
         case profilePath = "profile_path"
     }
+    
+    /**
+     Returns url for profile
+     */
+    func profilePathForQuality(quality: PosterPathQuality) -> String? {
+        if let profilePath = profilePath {
+            let baseImageUrl = Settings.shared.apiImageURL
+            
+            return baseImageUrl + quality.rawValue + profilePath
+        }
+        
+        return nil
+    }
 }

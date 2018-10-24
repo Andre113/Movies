@@ -10,10 +10,6 @@ import UIKit
 
 class MovieOverviewCell: UITableViewCell {
     
-    struct Constants {
-        static let initialHeight: CGFloat = 40
-    }
-    
     @IBOutlet private weak var titleLabel: UILabel?
     @IBOutlet private weak var overviewTextView: UITextView?
     

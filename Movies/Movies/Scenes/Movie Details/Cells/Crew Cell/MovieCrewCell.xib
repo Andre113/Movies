@@ -19,10 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="207.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bzb-Jx-IXo">
-                        <rect key="frame" x="10" y="50" width="300" height="147.5"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bzb-Jx-IXo">
+                        <rect key="frame" x="10" y="45" width="300" height="152.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gJN-1h-LGA">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="gJN-1h-LGA">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -46,7 +46,7 @@
                     <constraint firstItem="4y8-oG-xGM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="YmC-fw-pRt"/>
                     <constraint firstAttribute="trailing" secondItem="4y8-oG-xGM" secondAttribute="trailing" constant="10" id="egc-8m-7vk"/>
                     <constraint firstItem="4y8-oG-xGM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ic7-sJ-xbX"/>
-                    <constraint firstItem="Bzb-Jx-IXo" firstAttribute="top" secondItem="4y8-oG-xGM" secondAttribute="bottom" constant="10" id="whB-Zq-Mvw"/>
+                    <constraint firstItem="Bzb-Jx-IXo" firstAttribute="top" secondItem="4y8-oG-xGM" secondAttribute="bottom" constant="5" id="whB-Zq-Mvw"/>
                     <constraint firstItem="Bzb-Jx-IXo" firstAttribute="leading" secondItem="4y8-oG-xGM" secondAttribute="leading" id="ygi-XP-uxI"/>
                 </constraints>
             </tableViewCellContentView>

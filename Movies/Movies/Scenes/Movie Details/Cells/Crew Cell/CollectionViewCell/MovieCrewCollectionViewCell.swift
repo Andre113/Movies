@@ -15,9 +15,15 @@ class MovieCrewCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let textColor = UIColor.white
+        roleLabel?.textColor = textColor
+        nameLabel?.textColor = textColor
     }
     
     //    MARK: - Setup
-
+    func setupCrewMember(crewMember: CrewMember) {
+        nameLabel?.text = crewMember.name
+        roleLabel?.text = crewMember.job
+    }
 }
