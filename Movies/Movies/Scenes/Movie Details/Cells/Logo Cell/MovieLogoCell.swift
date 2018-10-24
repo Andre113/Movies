@@ -30,7 +30,7 @@ class MovieLogoCell: UITableViewCell {
             })
         }
         
-        if let path = movie.logoPathForQuality(quality: .Medium) {
+        if let path = movie.logoPathForQuality(quality: .High) {
             bigLogoImageView?.downloadedFrom(link: path, callback: { (success) in
                 
             })
