@@ -12,24 +12,53 @@ class MovieDetailsPresenter: Presenter {
     weak var view: MovieDetailsView?
     
     private let movieService: MovieService
+    private let creditService: CreditService
+    
+    private let group: DispatchGroup
+    private var movie: Movie?
+    private var movieError: Error?
+    private var credits: Credits?
+    private var creditsError: Error?
     
     //    MARK: - Obj Lifecycle
-    init(movieService: MovieService) {
+    init(movieService: MovieService,
+         creditService: CreditService) {
+        
         self.movieService = movieService
+        self.creditService = creditService
+        self.group = DispatchGroup()
     }
     
-    //    MARK: - Load Movie
-    func loadMovie(movieId: Int) {
-        movieService.fetchMovie(id: movieId) { (movie, error) in
-            if let movie = movie {
-                self.view?.setupMovie(movie: movie)
-                return
+    //    MARK: - Load
+    func loadInfoForMovieId(movieId: Int) {
+        group.enter()
+        loadMovie(movieId: movieId)
+        
+        group.enter()
+        loadCredit(movieId: movieId)
+        
+        group.notify(queue: DispatchQueue.main) {
+            if
+                let movie = self.movie,
+                let credits = self.credits {
+                self.view?.setupInformation(movie: movie, credits: credits)
             }
-            
-            if let error = error {
-                print(error)
-                return
-            } 
+        }
+    }
+    
+    private func loadMovie(movieId: Int) {
+        movieService.fetchMovie(id: movieId) { (movie, error) in
+            self.group.leave()
+            self.movie = movie
+            self.movieError = error
+        }
+    }
+    
+    private func loadCredit(movieId: Int) {
+        creditService.fetchCredits(movieId: movieId) { (credits, error) in
+            self.group.leave()
+            self.credits = credits
+            self.creditsError = error
         }
     }
 }

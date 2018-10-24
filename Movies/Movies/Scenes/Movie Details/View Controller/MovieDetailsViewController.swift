@@ -16,12 +16,15 @@ class MovieDetailsViewController: UIViewController {
     private var builders: [TableViewCellBuilder]
     private var movieId: Int?
     private var movie: Movie?
+    private var credits: Credits?
     
     //    MARK: - Obj Lifecycle
     required init?(coder aDecoder: NSCoder) {
-        presenter = MovieDetailsPresenter(movieService: MovieNetwork())
+        presenter = MovieDetailsPresenter(movieService: MovieNetwork(),
+                                          creditService: CreditNetwork())
         movie = nil
         movieId = nil
+        credits = nil
         builders = []
         
         super.init(coder: aDecoder)
@@ -46,7 +49,7 @@ class MovieDetailsViewController: UIViewController {
         presenter.attachView(view: self)
         
         if let movieId = movieId {
-            presenter.loadMovie(movieId: movieId)
+            presenter.loadInfoForMovieId(movieId: movieId)
         }
     }
     
@@ -56,7 +59,7 @@ class MovieDetailsViewController: UIViewController {
         movieTableView?.tableFooterView = UIView()
     }
     
-    private func setupDataSource(tableView: UITableView, movie: Movie) {
+    private func setupDataSource(tableView: UITableView, movie: Movie, credits: Credits) {
         builders = []
         
         let movieLogoBuilder = MovieLogoCellBuilder(tableView: tableView, movie: movie)
@@ -67,7 +70,7 @@ class MovieDetailsViewController: UIViewController {
         movieOverviewBuilder.registerCellAtTableView()
         builders.append(movieOverviewBuilder)
         
-        let movieCrewBuilder = MovieCrewCellBuider(tableView: tableView, movie: movie)
+        let movieCrewBuilder = MovieCrewCellBuider(tableView: tableView, crewMembers: credits.crew)
         movieCrewBuilder.registerCellAtTableView()
         builders.append(movieCrewBuilder)
         
@@ -101,11 +104,12 @@ extension MovieDetailsViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension MovieDetailsViewController: MovieDetailsView {
-    func setupMovie(movie: Movie) {
+    func setupInformation(movie: Movie, credits: Credits) {
         self.movie = movie
+        self.credits = credits
         
         if let tbv = movieTableView {
-            setupDataSource(tableView: tbv, movie: movie)
+            setupDataSource(tableView: tbv, movie: movie, credits: credits)
         }
     }
 }

@@ -9,5 +9,5 @@
 import UIKit
 
 protocol MovieDetailsView: NSObjectProtocol {
-    func setupMovie(movie: Movie)
+    func setupInformation(movie: Movie, credits: Credits)
 }

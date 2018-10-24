@@ -10,11 +10,11 @@ import UIKit
 
 class MovieCrewCellBuider: TableViewCellBuilder {
     let tableView: UITableView
-    let movie: Movie
+    let crewMembers: [CrewMember]
     
-    init(tableView: UITableView, movie: Movie) {
+    init(tableView: UITableView, crewMembers: [CrewMember]) {
         self.tableView = tableView
-        self.movie = movie
+        self.crewMembers = crewMembers
     }
     
     func registerCellAtTableView() {
@@ -26,7 +26,7 @@ class MovieCrewCellBuider: TableViewCellBuilder {
             return UITableViewCell()
         }
         
-        cell.setupMovie(movie: movie)
+        cell.setupCrewMembers(crewMembers: crewMembers)
         cell.bounds = CGRect(x: 0, y: 0, width: cell.bounds.width, height: 1000)
         
         return cell
