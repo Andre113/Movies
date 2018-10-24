@@ -39,9 +39,7 @@ class GenresListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let index = genres.firstIndex(where: { (genre) -> Bool in
-            genre.id == selectedGenre?.id
-        }) {
+        if let index = genres.firstIndex(where: { $0.id == selectedGenre?.id }) {
             let indexPath = IndexPath(row: index, section: 0)
             genresTableView?.scrollToRow(at: indexPath, at: .middle, animated: false)
         }
