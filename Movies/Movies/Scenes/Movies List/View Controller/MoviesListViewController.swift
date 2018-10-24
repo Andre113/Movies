@@ -43,6 +43,8 @@ class MoviesListViewController: UIViewController {
     //    MARK: - Setup
     private func setupPresenter() {
         presenter.attachView(view: self)
+        
+        view.startLoading()
         presenter.loadGenres()
     }
     
@@ -81,6 +83,7 @@ class MoviesListViewController: UIViewController {
 
 extension MoviesListViewController: MoviesListView {
     func setupMovies(movies: [Movie]) {
+        view.finishLoading()
         self.movies = movies
         
         moviesTableView?.reloadData()

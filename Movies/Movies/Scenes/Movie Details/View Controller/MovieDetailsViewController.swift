@@ -49,6 +49,7 @@ class MovieDetailsViewController: UIViewController {
         presenter.attachView(view: self)
         
         if let movieId = movieId {
+            view.startLoading()
             presenter.loadInfoForMovieId(movieId: movieId)
         }
     }
@@ -81,9 +82,6 @@ class MovieDetailsViewController: UIViewController {
         tableView.reloadData()
         tableView.layoutIfNeeded()
     }
-    
-    //    MARK: - Action
-    
 }
 
 extension MovieDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -110,6 +108,8 @@ extension MovieDetailsViewController: UITableViewDelegate, UITableViewDataSource
 
 extension MovieDetailsViewController: MovieDetailsView {
     func setupInformation(movie: Movie, credits: Credits) {
+        view.finishLoading()
+        
         self.movie = movie
         self.credits = credits
         

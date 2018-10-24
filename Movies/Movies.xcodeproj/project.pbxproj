@@ -59,6 +59,7 @@
 		24BB5196218016AF00D11D39 /* MovieCastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BB5194218016AF00D11D39 /* MovieCastCollectionViewCell.xib */; };
 		24BB51982180185100D11D39 /* MovieCastCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB51972180185100D11D39 /* MovieCastCellBuilder.swift */; };
 		24BB519A21801ED000D11D39 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB519921801ED000D11D39 /* UIView+Ext.swift */; };
+		24BB519D218021FE00D11D39 /* CustomUIActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB519C218021FE00D11D39 /* CustomUIActivityIndicatorView.swift */; };
 		5588DC2A133716776374B5C2 /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27D31A4CDD8434A089C8EF6 /* Pods_Movies.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		24BB5194218016AF00D11D39 /* MovieCastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCastCollectionViewCell.xib; sourceTree = "<group>"; };
 		24BB51972180185100D11D39 /* MovieCastCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastCellBuilder.swift; sourceTree = "<group>"; };
 		24BB519921801ED000D11D39 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		24BB519C218021FE00D11D39 /* CustomUIActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIActivityIndicatorView.swift; sourceTree = "<group>"; };
 		2E37E5A0176ADE243448E683 /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		A27D31A4CDD8434A089C8EF6 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C05BD89B4801BA0D359076 /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		24B050EF217ACDC500F99F35 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				24BB519B218021DF00D11D39 /* Custom Class */,
 				24B05112217ADADF00F99F35 /* System */,
 				24B05120217AE43300F99F35 /* Extension */,
 				24B0511B217AE1E000F99F35 /* Model */,
@@ -412,6 +415,14 @@
 			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
+		24BB519B218021DF00D11D39 /* Custom Class */ = {
+			isa = PBXGroup;
+			children = (
+				24BB519C218021FE00D11D39 /* CustomUIActivityIndicatorView.swift */,
+			);
+			path = "Custom Class";
+			sourceTree = "<group>";
+		};
 		8DEB607A5C139CE7527FA9B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +574,7 @@
 				24BB5195218016AF00D11D39 /* MovieCastCollectionViewCell.swift in Sources */,
 				24BB519A21801ED000D11D39 /* UIView+Ext.swift in Sources */,
 				24B0511F217AE20D00F99F35 /* Movie.swift in Sources */,
+				24BB519D218021FE00D11D39 /* CustomUIActivityIndicatorView.swift in Sources */,
 				24BB5164217FF17E00D11D39 /* TableViewCellBuilder.swift in Sources */,
 				24B05128217AE6DA00F99F35 /* GenreNetwork.swift in Sources */,
 				24BB51752180010800D11D39 /* MovieOverviewCell.swift in Sources */,
