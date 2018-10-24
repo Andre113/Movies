@@ -87,15 +87,15 @@ extension GenresListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let genre = genres[indexPath.row]
-        var selected = false
-        
-        if selectedGenre?.id == genre.id {
-            selected = true
-        }
-        
-        cell.setupGenre(genre: genre, selected: selected)
+        cell.setupGenre(genre: genre)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let genre = genres[indexPath.row]
+        let selected = selectedGenre?.id == genre.id
+        cell.setSelected(selected, animated: false)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
