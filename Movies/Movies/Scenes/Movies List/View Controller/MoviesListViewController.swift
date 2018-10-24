@@ -57,11 +57,24 @@ class MoviesListViewController: UIViewController {
     
     //    MARK: - Action
     @IBAction func genresButtonTouched(_ sender: Any) {
+        goToGenresListViewController()
+    }
+    
+    //    MARK: - Navigation
+    func goToGenresListViewController() {
         let st = UIStoryboard(name: "Main", bundle: nil)
         if let genresVC = st.instantiateViewController(withIdentifier: GenresListViewController.className) as? GenresListViewController {
             genresVC.setupGenres(genres: genres, selectedGenre: actualGenre)
             genresVC.delegate = self
             navigationController?.presentInNavigation(vc: genresVC, completion: nil)
+        }
+    }
+    
+    func goToMovieDetailsViewController(movie: Movie) {
+        let st = UIStoryboard(name: "Main", bundle: nil)
+        if let movieVC = st.instantiateViewController(withIdentifier: MovieDetailsViewController.className) as? MovieDetailsViewController {
+            movieVC.setupMovieId(movieId: movie.id)
+            navigationController?.pushViewController(movieVC, animated: true)
         }
     }
 }
@@ -141,5 +154,8 @@ extension MoviesListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let movie = movies[indexPath.row]
+        goToMovieDetailsViewController(movie: movie)
     }
 }

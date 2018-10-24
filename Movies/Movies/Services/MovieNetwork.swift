@@ -14,6 +14,7 @@ enum MovieServiceError: Equatable, Error {
 
 protocol MovieService {
     func fetchMovies(genre: Genre, page: Int, completionHandler: @escaping([Movie], MovieServiceError?) -> Void)
+    func fetchMovie(id: Int, completionHandler: @escaping(Movie?, MovieServiceError?) -> Void)
 }
 
 struct MovieNetwork: MovieService {
@@ -50,6 +51,41 @@ struct MovieNetwork: MovieService {
             } catch let decodeError {
                 error = MovieServiceError.CannotFetch(decodeError.localizedDescription)
                 completionHandler(movies, error)
+                return
+            }
+        }
+    }
+    
+    func fetchMovie(id: Int, completionHandler: @escaping (Movie?, MovieServiceError?) -> Void) {
+        let url = NetworkManager.baseURL + "movie/\(id)"
+        print(url)
+        
+        var params = NetworkManager.defaultParams
+        params["language"] = "en-US"
+        
+        NetworkManager.requestURL(method: .get, url: url, parameters: params) { (response) in
+            var movie: Movie?
+            var error: MovieServiceError?
+            
+            if let responseError = response.error {
+                error = MovieServiceError.CannotFetch(responseError.localizedDescription)
+                completionHandler(movie, error)
+                return
+            }
+            
+            guard let data = response.data else {
+                error = MovieServiceError.CannotFetch("Request returned no data")
+                completionHandler(movie, error)
+                return
+            }
+            
+            do {
+                movie = try JSONDecoder().decode(Movie.self, from: data)
+                completionHandler(movie, error)
+                return
+            } catch let decodeError {
+                error = MovieServiceError.CannotFetch(decodeError.localizedDescription)
+                completionHandler(movie, error)
                 return
             }
         }
