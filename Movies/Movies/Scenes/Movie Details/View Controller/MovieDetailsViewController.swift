@@ -117,4 +117,10 @@ extension MovieDetailsViewController: MovieDetailsView {
             setupDataSource(tableView: tbv, movie: movie, credits: credits)
         }
     }
+    
+    func showError(error: Error) {
+        view.finishLoading()
+        
+        showAlert(message: error.localizedDescription)
+    }
 }

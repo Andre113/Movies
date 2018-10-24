@@ -18,12 +18,14 @@ class GenresListViewController: UIViewController {
     
     private var genres: [Genre]
     private var selectedGenre: Genre?
+    private var refreshControl: UIRefreshControl?
     private let presenter: GenresListPresenter
     weak var delegate: GenresListDelegate?
     
     //    MARK: - Obj Lifecycle
     required init?(coder aDecoder: NSCoder) {
         genres = []
+        refreshControl = nil
         presenter = GenresListPresenter(genreService: GenreNetwork())
         super.init(coder: aDecoder)
     }
@@ -34,6 +36,7 @@ class GenresListViewController: UIViewController {
         
         setupTableView()
         setupPresenter()
+        setupRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +64,15 @@ class GenresListViewController: UIViewController {
             tbv.delegate = self
             tbv.dataSource = self
             tbv.tableFooterView = UIView()
+        }
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        
+        if let refreshControl = refreshControl {
+            refreshControl.addTarget(presenter, action: #selector(presenter.loadGenres), for: UIControl.Event.valueChanged)
+            genresTableView?.addSubview(refreshControl)
         }
     }
     
@@ -110,5 +122,16 @@ extension GenresListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension GenresListViewController: GenresListview {
+    func setupGenres(genres: [Genre]) {
+        refreshControl?.endRefreshing()
+        self.genres = genres
+        
+        genresTableView?.reloadData()
+    }
     
+    func showError(error: Error) {
+        refreshControl?.finishLoading()
+        
+        showAlert(message: error.localizedDescription)
+    }
 }

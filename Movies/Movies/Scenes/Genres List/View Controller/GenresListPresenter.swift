@@ -16,4 +16,17 @@ class GenresListPresenter: Presenter {
     init(genreService: GenreService) {
         self.genreService = genreService
     }
+    
+    //    MARK: - Load Genres
+    @objc
+    func loadGenres() {
+        genreService.fetchGenres { (genres, error) in
+            if let error = error {
+                self.view?.showError(error: error)
+                return
+            }
+            
+            self.view?.setupGenres(genres: genres)
+        }
+    }
 }

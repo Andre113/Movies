@@ -12,4 +12,5 @@ protocol MoviesListView: NSObjectProtocol {
     func setupMovies(movies: [Movie])
     func setupMoreMovies(movies: [Movie])
     func setupGenres(genres: [Genre])
+    func showError(error: Error)
 }

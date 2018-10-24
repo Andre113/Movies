@@ -10,4 +10,5 @@ import UIKit
 
 protocol MovieDetailsView: NSObjectProtocol {
     func setupInformation(movie: Movie, credits: Credits)
+    func showError(error: Error)
 }

@@ -31,6 +31,11 @@ class MovieDetailsPresenter: Presenter {
     
     //    MARK: - Load
     func loadInfoForMovieId(movieId: Int) {
+        movie = nil
+        credits = nil
+        movieError = nil
+        creditsError = nil
+        
         group.enter()
         loadMovie(movieId: movieId)
         
@@ -42,6 +47,17 @@ class MovieDetailsPresenter: Presenter {
                 let movie = self.movie,
                 let credits = self.credits {
                 self.view?.setupInformation(movie: movie, credits: credits)
+                return
+            }
+            
+            if let movieError = self.movieError {
+                self.view?.showError(error: movieError)
+                return
+            }
+            
+            if let creditsError = self.creditsError {
+                self.view?.showError(error: creditsError)
+                return
             }
         }
     }

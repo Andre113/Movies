@@ -24,6 +24,7 @@ class MoviesListPresenter: Presenter {
     func loadGenres() {
         genreService.fetchGenres { (genres, error) in
             if let error = error {
+                self.view?.showError(error: error)
                 return
             }
             
@@ -35,6 +36,7 @@ class MoviesListPresenter: Presenter {
     func loadMovies(for genre: Genre, at page: Int) {
         movieService.fetchMovies(genre: genre, page: page) { (movies, error) in
             if let error = error {
+                self.view?.showError(error: error)
                 return
             }
             
@@ -44,7 +46,7 @@ class MoviesListPresenter: Presenter {
     
     func loadMoreMovies(for genre: Genre, at page: Int) {
         movieService.fetchMovies(genre: genre, page: page) { (movies, error) in
-            if let error = error {
+            if let _ = error {
                 return
             }
             

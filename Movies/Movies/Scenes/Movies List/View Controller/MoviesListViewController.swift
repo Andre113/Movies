@@ -63,7 +63,7 @@ class MoviesListViewController: UIViewController {
     }
     
     //    MARK: - Navigation
-    func goToGenresListViewController() {
+    private func goToGenresListViewController() {
         let st = UIStoryboard(name: "Main", bundle: nil)
         if let genresVC = st.instantiateViewController(withIdentifier: GenresListViewController.className) as? GenresListViewController {
             genresVC.setupGenres(genres: genres, selectedGenre: actualGenre)
@@ -72,7 +72,7 @@ class MoviesListViewController: UIViewController {
         }
     }
     
-    func goToMovieDetailsViewController(movie: Movie) {
+    private func goToMovieDetailsViewController(movie: Movie) {
         let st = UIStoryboard(name: "Main", bundle: nil)
         if let movieVC = st.instantiateViewController(withIdentifier: MovieDetailsViewController.className) as? MovieDetailsViewController {
             movieVC.setupMovieId(movieId: movie.id)
@@ -103,6 +103,12 @@ extension MoviesListViewController: MoviesListView {
             self.actualGenre = firstGenre
             presenter.loadMovies(for: firstGenre, at: actualPage)
         }
+    }
+    
+    func showError(error: Error) {
+        view.finishLoading()
+        
+        showAlert(message: error.localizedDescription)
     }
 }
 

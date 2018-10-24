@@ -9,5 +9,6 @@
 import UIKit
 
 protocol GenresListview: NSObjectProtocol {
-
+    func setupGenres(genres: [Genre])
+    func showError(error: Error)
 }
