@@ -17,6 +17,9 @@ extension UINavigationController {
         navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
+    /**
+     Present view controller embeded in an UINavigationController
+     */
     func presentInNavigation(vc: UIViewController, animated: Bool = true, completion: (() -> Void)?) {
         let navController = UINavigationController(rootViewController: vc)
         present(navController, animated: animated, completion: completion)

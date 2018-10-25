@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIImageView {
+    /**
+     Downloads an UIImage from URL and set it as UIImageView image
+     */
     func downloadedFrom(url: URL,
                         contentMode mode: UIView.ContentMode = .scaleAspectFill,
                         callback: @escaping(Bool) -> Void) {
@@ -30,6 +33,9 @@ extension UIImageView {
         }.resume()
     }
     
+    /**
+     Downloads an UIImage from String and set it as UIImageView image
+     */
     func downloadedFrom(link: String,
                         contentMode mode: UIView.ContentMode = .scaleAspectFill,
                         callback: @escaping(Bool) -> Void) {
