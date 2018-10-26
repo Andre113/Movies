@@ -10,7 +10,7 @@ import UIKit
 
 class MovieLogoCellBuilder: TableViewCellBuilder {
     let tableView: UITableView
-    let movie: Movie
+    private let movie: Movie
     
     init(tableView: UITableView, movie: Movie) {
         self.tableView = tableView

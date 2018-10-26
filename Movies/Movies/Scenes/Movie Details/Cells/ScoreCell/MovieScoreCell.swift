@@ -13,8 +13,9 @@ class MovieScoreCell: UITableViewCell {
     @IBOutlet private weak var ringGraphView: RingGraphView?
     @IBOutlet private weak var scoreTitleLabel: UILabel?
     @IBOutlet private weak var scoreLabel: UILabel?
-    @IBOutlet private weak var playImageView: UIImageView?
     @IBOutlet private weak var playLabel: UILabel?
+    
+    weak var movieDetailsDelegate: MovieDetailsDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +38,8 @@ class MovieScoreCell: UITableViewCell {
     
     //    MARK: - Action
     @IBAction func playButtonTouched(_ sender: Any) {
+        if let delegate = movieDetailsDelegate {
+            delegate.trailerButtonTouched(sender: self)
+        }
     }
-    
 }

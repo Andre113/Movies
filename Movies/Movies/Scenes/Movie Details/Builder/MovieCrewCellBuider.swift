@@ -10,7 +10,7 @@ import UIKit
 
 class MovieCrewCellBuider: TableViewCellBuilder {
     let tableView: UITableView
-    let crewMembers: [CrewMember]
+    private let crewMembers: [CrewMember]
     
     init(tableView: UITableView, crewMembers: [CrewMember]) {
         self.tableView = tableView

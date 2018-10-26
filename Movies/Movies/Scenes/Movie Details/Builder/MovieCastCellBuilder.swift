@@ -10,7 +10,7 @@ import UIKit
 
 class MovieCastCellBuilder: TableViewCellBuilder {
     let tableView: UITableView
-    let castMembers: [CastMember]
+    private let castMembers: [CastMember]
     
     init(tableView: UITableView, castMembers: [CastMember]) {
         self.tableView = tableView

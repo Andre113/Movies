@@ -1,5 +1,5 @@
 //
-//  MovieScoreCellBuilder.swift
+//  MovieMenuCellBuilder.swift
 //  Movies
 //
 //  Created by Andre Lucas Ota on 10/25/18.
@@ -8,35 +8,30 @@
 
 import UIKit
 
-class MovieScoreCellBuilder: TableViewCellBuilder {
+class MovieMenuCellBuilder: TableViewCellBuilder {
     let tableView: UITableView
-    private let movie: Movie
     private weak var movieDetailsDelegate: MovieDetailsDelegate?
     
-    init(tableView: UITableView,
-         movie: Movie,
-         movieDetailsDelegate: MovieDetailsDelegate?) {
+    init(tableView: UITableView, movieDetailsDelegate: MovieDetailsDelegate?) {
         self.tableView = tableView
-        self.movie = movie
         self.movieDetailsDelegate = movieDetailsDelegate
     }
     
     func registerCellAtTableView() {
-        tableView.register(UINib(nibName: MovieScoreCell.className, bundle: nil), forCellReuseIdentifier: MovieScoreCell.className)
+        tableView.register(UINib(nibName: MovieMenuCell.className, bundle: nil), forCellReuseIdentifier: MovieMenuCell.className)
     }
     
     func cellForRowAtIndexPath(indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieScoreCell.className, for: indexPath) as? MovieScoreCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieMenuCell.className, for: indexPath) as? MovieMenuCell else {
             return UITableViewCell()
         }
         
-        cell.setupMovie(movie: movie)
         cell.movieDetailsDelegate = movieDetailsDelegate
         
         return cell
     }
     
     func heightForCell() -> CGFloat {
-        return UITableView.automaticDimension
+        return 40
     }
 }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol MovieDetailsDelegate: class {
+    func trailerButtonTouched(sender: Any?)
+    func menuButtonTouched(sender: Any?)
+}
+
 class MovieDetailsViewController: UIViewController {
     
     @IBOutlet private weak var movieTableView: UITableView?
@@ -67,13 +72,17 @@ class MovieDetailsViewController: UIViewController {
         movieLogoBuilder.registerCellAtTableView()
         builders.append(movieLogoBuilder)
         
-        let movieScoreBuilder = MovieScoreCellBuilder(tableView: tableView, movie: movie)
+        let movieScoreBuilder = MovieScoreCellBuilder(tableView: tableView, movie: movie, movieDetailsDelegate: self)
         movieScoreBuilder.registerCellAtTableView()
         builders.append(movieScoreBuilder)
         
         let movieOverviewBuilder = MovieOverviewCellBuilder(tableView: tableView, movie: movie)
         movieOverviewBuilder.registerCellAtTableView()
         builders.append(movieOverviewBuilder)
+        
+        let movieMenuBuilder = MovieMenuCellBuilder(tableView: tableView, movieDetailsDelegate: self)
+        movieMenuBuilder.registerCellAtTableView()
+        builders.append(movieMenuBuilder)
         
         let movieCrewBuilder = MovieCrewCellBuider(tableView: tableView, crewMembers: credits.crew)
         movieCrewBuilder.registerCellAtTableView()
@@ -126,5 +135,15 @@ extension MovieDetailsViewController: MovieDetailsView {
         view.finishLoading()
         
         showAlert(message: error.localizedDescription)
+    }
+}
+
+extension MovieDetailsViewController: MovieDetailsDelegate {
+    func trailerButtonTouched(sender: Any?) {
+        showAlert(message: "Função não implementada")
+    }
+    
+    func menuButtonTouched(sender: Any?) {
+        showAlert(message: "Função não implementada")
     }
 }
