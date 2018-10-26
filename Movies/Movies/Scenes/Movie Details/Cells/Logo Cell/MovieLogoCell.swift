@@ -22,7 +22,8 @@ class MovieLogoCell: UITableViewCell {
     
     //    MARK: - Setup
     func setupMovie(movie: Movie) {
-        titleLabel?.text = movie.title
+//        titleLabel?.text = movie.title
+        titleLabel?.text = "The problem with most of the answers on here are that they give you as the resulting string when you don't ha The problem with most of the answers on here are that they give you as the resulting string when you don't ha"
         
         if let path = movie.logoPathForQuality(quality: .Medium) {
             smallLogoImageView?.downloadedFrom(link: path, callback: { (success) in

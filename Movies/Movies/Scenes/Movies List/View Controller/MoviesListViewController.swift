@@ -88,6 +88,10 @@ extension MoviesListViewController: MoviesListView {
         
         moviesTableView?.reloadData()
         moviesTableView?.layoutIfNeeded()
+        
+        if movies.count > 0 {
+            moviesTableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
     
     func setupMoreMovies(movies: [Movie]) {
