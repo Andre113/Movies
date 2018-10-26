@@ -67,6 +67,10 @@ class MovieDetailsViewController: UIViewController {
         movieLogoBuilder.registerCellAtTableView()
         builders.append(movieLogoBuilder)
         
+        let movieScoreBuilder = MovieScoreCellBuilder(tableView: tableView, movie: movie)
+        movieScoreBuilder.registerCellAtTableView()
+        builders.append(movieScoreBuilder)
+        
         let movieOverviewBuilder = MovieOverviewCellBuilder(tableView: tableView, movie: movie)
         movieOverviewBuilder.registerCellAtTableView()
         builders.append(movieOverviewBuilder)
